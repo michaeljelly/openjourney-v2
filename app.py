@@ -1,13 +1,14 @@
-from transformers import pipeline
-import torch
+# from transformers import pipeline
+# import torch
+from diffusers import DiffusionPipeline
 
 # Init is ran on server startup
 # Load your model to GPU as a global variable here using the variable name "model"
 def init():
     global model
     
-    device = 0 if torch.cuda.is_available() else -1
-    model = pipeline('fill-mask', model='bert-base-uncased', device=device)
+#     device = 0 if torch.cuda.is_available() else -1
+    model = DiffusionPipeline.from_pretrained("prompthero/openjourney-v2")
 
 # Inference is ran for every server call
 # Reference your preloaded global model variable here.
